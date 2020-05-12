@@ -1,0 +1,44 @@
+//Package triangle provides methods to check triangle inequalities
+package triangle
+
+import "math"
+
+// Notice KindFromSides() returns this type. Pick a suitable data type.
+type Kind int
+
+const (
+	// Pick values for the following identifiers used by the test program.
+	NaT = iota // not a triangle
+	Equ        // equilateral
+	Iso        // isosceles
+	Sca        // scalene
+)
+
+//KindFromSides check whether 3 sides form a triangle and what kind of triangle is
+func KindFromSides(a, b, c float64) Kind {
+	// Determine if a triangle is equilateral, isosceles, or scalene.
+	// An equilateral triangle has all three sides the same length.
+	// An isosceles triangle has at least two sides the same length.
+	// 	(It is sometimes specified as having exactly two sides the same length, but for the purposes of this exercise we'll say at least two.)
+	// A scalene triangle has all sides of different lengths.
+	var k Kind
+	switch {
+
+	case a <= 0 || b <= 0 || c <= 0:
+		k = NaT
+	case math.IsNaN(a) || math.IsNaN(b) || math.IsNaN(c):
+		k = NaT
+	case math.IsInf(a, 0) || math.IsInf(b, 0) || math.IsInf(c, 0):
+		k = NaT
+	case a > b+c || b > c+a || c > a+b:
+		k = NaT
+	case a == b && b == c:
+		k = Equ
+	case a != b && b != c && c != a:
+		k = Sca
+	default:
+		k = Iso
+	}
+
+	return k
+}
