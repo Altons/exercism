@@ -6,10 +6,9 @@ import (
 
 //IsIsogram determines whether a word or phrase is an isogram
 func IsIsogram(s string) bool {
-	lst := strings.Split(strings.ToLower(s), "")
-	repeated := make(map[string]bool)
-	for _, c := range lst {
-		if c == "-" || c == " " {
+	repeated := make(map[rune]bool)
+	for _, c := range strings.ToLower(s) {
+		if c == '-' || c == ' ' {
 			continue
 		}
 		if repeated[c] {
