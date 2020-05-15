@@ -6,12 +6,13 @@ import (
 
 //IsIsogram determines whether a word or phrase is an isogram
 func IsIsogram(s string) bool {
-	replacer := strings.NewReplacer(" ", "", "-", "")
-	s = strings.ToLower(replacer.Replace(s))
-	lst := strings.Split(s, "")
+	lst := strings.Split(strings.ToLower(s), "")
 	repeated := make(map[string]bool)
 	for _, c := range lst {
-		if _, ok := repeated[c]; ok {
+		if repeated[c] {
+			if c == "-" || c == " " {
+				continue
+			}
 			return false
 		}
 		repeated[c] = true
