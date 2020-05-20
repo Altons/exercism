@@ -1,14 +1,9 @@
 package diffsquares
 
-import "math"
-
 //SquareOfSum returns the square of the sum of the first ten natural numbers
 func SquareOfSum(n int) int {
-	var res int
-	for i := 1; i <= n; i++ {
-		res += i
-	}
-	return int(math.Pow(float64(res), 2.0))
+	sum := (1 + n) * n / 2
+	return sum * sum
 }
 
 //SumOfSquares return the sum of the squares of the first ten natural numbers
