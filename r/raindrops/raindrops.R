@@ -1,13 +1,11 @@
 raindrops <- function(number) {
-  r<-""
-  if( number%%3 == 0) {
-    r <-paste0(r,"Pling")
-  }
-  if( number%%5 == 0) {
-    r <-paste0(r,"Plang")
-  }
-  if( number%%7 == 0) {
-    r <-paste0(r,"Plong")
+  r <- ""
+  divisors <- c(3, 5, 7)
+  sounds <- c("Pling", "Plang", "Plong")
+  for (i in 1:length(divisors)) {
+    if (number %% divisors[i] == 0) {
+      r <- paste0(r, sounds[i])
+    }
   }
   if (r == "") {
     return(paste0(number))
