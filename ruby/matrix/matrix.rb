@@ -3,6 +3,7 @@
 class Matrix
   def initialize(str)
     @str = str
+    @rows ||= rows
   end
 
   def rows
@@ -10,7 +11,7 @@ class Matrix
   end
 
   def columns
-    build_rows.transpose
+    @rows.transpose
   end
 
   private
