@@ -8,7 +8,7 @@ import (
 
 //Valid check whether or not it is valid per the Luhn formula
 func Valid(s string) bool {
-	newS := strings.Replace(s, " ", "", -1)
+	newS := strings.ReplaceAll(s, " ", "")
 
 	if len(newS) < 2 {
 		return false
@@ -18,15 +18,16 @@ func Valid(s string) bool {
 	sum := 0
 	for i := nDigits - 1; i >= 0; i-- {
 		char := newS[i]
+		logic := i%2 == parity
 		if unicode.IsDigit(rune(char)) == false {
 			return false
 		}
 		digit, _ := strconv.Atoi(string(char))
-		if i%2 == parity {
-			digit = digit * 2
+		if logic {
+			digit *= 2
 		}
 		if digit > 9 {
-			digit = digit - 9
+			digit -= 9
 		}
 		sum += digit
 	}
