@@ -14,22 +14,25 @@ func Valid(s string) bool {
 		return false
 	}
 	nDigits := len(newS)
-	parity := nDigits % 2
+	// parity := nDigits % 2
 	sum := 0
+	double := false
 	for i := nDigits - 1; i >= 0; i-- {
 		char := newS[i]
-		logic := i%2 == parity
 		if unicode.IsDigit(rune(char)) == false {
 			return false
 		}
 		digit, _ := strconv.Atoi(string(char))
-		if logic {
+		if double {
 			digit *= 2
-		}
-		if digit > 9 {
-			digit -= 9
+			if digit > 9 {
+				digit -= 9
+			}
+
 		}
 		sum += digit
+		double = !double
+
 	}
 	return sum%10 == 0
 }
