@@ -1,36 +1,19 @@
+//Package grains calculates the number of grains of wheat on a chessboard given that the number on each square doubles.
 package grains
 
 import (
 	"fmt"
 )
 
-//Square ...
+//Square calculates the number of wheat grains on a given square.
 func Square(number int) (uint64, error) {
 	if number <= 0 || number > 64 {
 		return uint64(1), fmt.Errorf("Choose a positive number")
 	}
-	return Pow(2, uint64(number)-1), nil
+	return 1 << (number - 1), nil
 }
 
-//Total ....
+//Total calculates the total number of grains on the chessboard.
 func Total() uint64 {
-	var total uint64
-	for i := 1; i <= 64; i++ {
-		total += Pow(2, uint64(i)-1)
-	}
-	return total
-}
-
-//Pow calculates compute x^n using binary powering algorithm
-func Pow(a, b uint64) uint64 {
-	var p uint64
-	p = 1
-	for b > 0 {
-		if b&1 != 0 {
-			p *= a
-		}
-		b >>= 1
-		a *= a
-	}
-	return p
+	return 1<<64 - 1
 }
