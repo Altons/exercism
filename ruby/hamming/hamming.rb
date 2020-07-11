@@ -1,9 +1,15 @@
-# frozen_string_literal: true
-
 class Hamming
   def self.compute(strand1, strand2)
-    return raise ArgumentError if strand1.length != strand2.length
+    new(strand1, strand2).distance
+  end
 
-    strand1.chars.zip(strand2.chars).reject { |c| c.first == c.last }.count
+  def initialize(strand1, strand2)
+    return raise ArgumentError, 'Strand lengths must be of identical length' unless strand1.length == strand2.length
+
+    @nucleotides = strand1.chars.zip(strand2.chars)
+  end
+
+  def distance
+    @nucleotides.count { |c| c.first != c.last }
   end
 end
